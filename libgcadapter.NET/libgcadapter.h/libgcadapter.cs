@@ -5,7 +5,7 @@ namespace libgcadapter.NET
 {
 	internal static unsafe class libgcadapter
 	{
-		public const int LIBGCADAPTER_VERSION = 101;
+		public const int LIBGCADAPTER_VERSION = 110;
 
 		[DllImport("dl")]
 		public static extern IntPtr dlopen(string file, int mode);
@@ -20,10 +20,10 @@ namespace libgcadapter.NET
 		public static extern void gc_adapter_update(byte* adapter);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_pad_poll(byte* adapter, int port, GameCubeControllerState* state);
+		public static extern void gc_adapter_poll(byte* adapter);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_pad_set_rumble(byte* adapter, int port, byte rumble);
+		public static extern void gc_adapter_set_rumble(byte* adapter, int port, byte rumble);
 
 		[DllImport("libgcadapter.dll")]
 		public static extern void gc_adapter_free(byte* adapter);

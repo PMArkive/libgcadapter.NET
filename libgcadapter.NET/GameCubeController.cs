@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace libgcadapter.NET
 {
@@ -16,18 +17,30 @@ namespace libgcadapter.NET
 			private set;
 		}
 
+		public GameCubeControllerState State
+		{
+			get
+			{
+				int at = 1;
+				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerType);
+				at += Port * sizeof(GameCubeControllerState);
+				return (GameCubeControllerState)Marshal.PtrToStructure<GameCubeControllerState>((IntPtr)(Adapter._adapter + at));
+			}
+		}
+
 		public byte Rumble
 		{
 			get
 			{
 				int at = 1;
 				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerType);
+				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerState);
 				at += Port;
 				return Adapter._adapter[at];
 			}
 			set
 			{
-				libgcadapter.gc_pad_set_rumble(Adapter._adapter, Port, value);
+				libgcadapter.gc_adapter_set_rumble(Adapter._adapter, Port, value);
 			}
 		}
 
@@ -62,24 +75,11 @@ namespace libgcadapter.NET
 				return Type == GameCubeControllerType.Wired;
 			}
 		}
-
-		private GameCubeControllerState _state;
-
+			
 		internal GameCubeController(GameCubeAdapter adapter, int port)
 		{
 			Adapter = adapter;
 			Port = port;
-			_state = new GameCubeControllerState();
-			_state.Reset();
-		}
-
-		public GameCubeControllerState Poll()
-		{
-			fixed(GameCubeControllerState* fstate = &_state)
-			{
-				libgcadapter.gc_pad_poll(Adapter._adapter, Port, fstate);
-			}
-			return _state;
 		}
 	}
 }

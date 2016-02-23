@@ -72,6 +72,11 @@ namespace libgcadapter.NET
 			libgcadapter.gc_adapter_update(_adapter);
 		}
 
+		public void Poll()
+		{
+			libgcadapter.gc_adapter_poll(_adapter);
+		}
+
 		public GameCubeController Port(int port)
 		{
 			if(port < 0 || port > 3)
