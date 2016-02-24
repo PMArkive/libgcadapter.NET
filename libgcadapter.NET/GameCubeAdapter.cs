@@ -13,6 +13,14 @@ namespace libgcadapter.NET
 				return _adapter[0] == 1;
 			}
 		}
+			
+		public bool Reserved
+		{
+			get
+			{
+				return _adapter[1] == 1;
+			}
+		}
 
 		private bool _succeeded = false;
 

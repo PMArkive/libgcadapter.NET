@@ -5,7 +5,7 @@ namespace libgcadapter.NET
 {
 	internal static unsafe class libgcadapter
 	{
-		public const int LIBGCADAPTER_VERSION = 110;
+		public const int LIBGCADAPTER_VERSION = 111;
 
 		[DllImport("dl")]
 		public static extern IntPtr dlopen(string file, int mode);
