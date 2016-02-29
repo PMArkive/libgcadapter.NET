@@ -7,9 +7,6 @@ namespace libgcadapter.NET
 	{
 		public const int LIBGCADAPTER_VERSION = 111;
 
-		[DllImport("dl")]
-		public static extern IntPtr dlopen(string file, int mode);
-
 		[DllImport("libgcadapter.dll")]
 		public static extern int gc_adapter_get_version();
 
