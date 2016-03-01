@@ -10,7 +10,7 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				return _adapter[0] == 1;
+				return _adapter->open;
 			}
 		}
 			
@@ -18,14 +18,13 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				return _adapter[1] == 1;
+				return _adapter->reserved;
 			}
 		}
 
 		private bool _succeeded = false;
 
-		// yes, we are accessing the adapter instance as a raw byte array.
-		internal byte* _adapter;
+		internal libgcadapter.gc_adapter_t* _adapter;
 
 		private GameCubeController[] _controllers = new GameCubeController[Ports];
 

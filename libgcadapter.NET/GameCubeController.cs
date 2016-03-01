@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace libgcadapter.NET
@@ -21,10 +21,8 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				int at = 2;
-				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerType);
-				at += Port * sizeof(GameCubeControllerState);
-				return (GameCubeControllerState)Marshal.PtrToStructure<GameCubeControllerState>((IntPtr)(Adapter._adapter + at));
+				libgcadapter.gc_adapter_t adapter = Marshal.PtrToStructure<libgcadapter.gc_adapter_t>((IntPtr)Adapter._adapter);
+				return adapter.state[Port];
 			}
 		}
 
@@ -32,11 +30,8 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				int at = 2;
-				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerType);
-				at += GameCubeAdapter.Ports * sizeof(GameCubeControllerState);
-				at += Port;
-				return Adapter._adapter[at];
+				libgcadapter.gc_adapter_t adapter = Marshal.PtrToStructure<libgcadapter.gc_adapter_t>((IntPtr)Adapter._adapter);
+				return adapter.rumble[Port];
 			}
 			set
 			{
@@ -48,15 +43,8 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				int at = 2;
-				at += Port * sizeof(GameCubeControllerType);
-				byte[] value = new byte[] { 
-					Adapter._adapter[at], 
-					Adapter._adapter[at + 1],
-					Adapter._adapter[at + 2], 
-					Adapter._adapter[at + 3]
-				}; 
-				return (GameCubeControllerType)BitConverter.ToInt32(value, 0);
+				libgcadapter.gc_adapter_t adapter = Marshal.PtrToStructure<libgcadapter.gc_adapter_t>((IntPtr)Adapter._adapter);
+				return adapter.pad[Port];
 			}
 		}
 
