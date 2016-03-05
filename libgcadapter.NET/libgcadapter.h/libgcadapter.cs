@@ -34,19 +34,19 @@ namespace libgcadapter.NET
 		public static extern int gc_adapter_get_version();
 
 		[DllImport("libgcadapter.dll")]
-		public static extern bool gc_adapter_initialize(out gc_adapter_t* adapter);
+		public static extern bool gc_adapter_initialize(out IntPtr adapter);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_adapter_update(gc_adapter_t* adapter);
+		public static extern void gc_adapter_update(IntPtr adapter);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_adapter_poll(gc_adapter_t* adapter);
+		public static extern void gc_adapter_poll(IntPtr adapter);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_adapter_set_rumble(gc_adapter_t* adapter, int port, byte rumble);
+		public static extern void gc_adapter_set_rumble(IntPtr adapter, int port, byte rumble);
 
 		[DllImport("libgcadapter.dll")]
-		public static extern void gc_adapter_free(gc_adapter_t* adapter);
+		public static extern void gc_adapter_free(IntPtr adapter);
 	}
 }
 

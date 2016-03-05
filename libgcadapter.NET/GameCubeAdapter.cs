@@ -10,7 +10,7 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				return _adapter->open;
+				return ((byte*)_adapter)[0] == 1;
 			}
 		}
 			
@@ -18,13 +18,13 @@ namespace libgcadapter.NET
 		{
 			get
 			{
-				return _adapter->reserved;
+				return ((byte*)_adapter)[1] == 1;
 			}
 		}
 
 		private bool _succeeded = false;
 
-		internal libgcadapter.gc_adapter_t* _adapter;
+		internal IntPtr _adapter;
 
 		private GameCubeController[] _controllers = new GameCubeController[Ports];
 
